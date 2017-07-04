@@ -28,22 +28,20 @@ import java.util.Map;
  * Created by RajK on 16-05-2017.
  */
 
-public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_Adapter.MyViewHolder>
-{
+public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_Adapter.MyViewHolder> {
     List<String> list = new ArrayList<>();
     private Context context;
     private CustomerTaskAdapterListener listener;
 
 
-    public CustomerTasks_Adapter(List<String> list, Context c,CustomerTaskAdapterListener listener)
-    {
+    public CustomerTasks_Adapter(List<String> list, Context c, CustomerTaskAdapterListener listener) {
         this.list = list;
         this.context = c;
-        this.listener =listener;
+        this.listener = listener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView taskname,timestamp,icon_text;
+        TextView taskname, timestamp, icon_text;
         ImageView imgProfile;
         Button viewdetail;
 
@@ -51,17 +49,16 @@ public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_A
             super(itemView);
             taskname = (TextView) itemView.findViewById(R.id.tv_taskname);
             timestamp = (TextView) itemView.findViewById(R.id.timestamp);
-            icon_text =(TextView)itemView.findViewById(R.id.icon_text);
-            imgProfile = (ImageView)itemView.findViewById(R.id.icon_profile);
-            viewdetail = (Button)itemView.findViewById(R.id.viewdetails);
+            icon_text = (TextView) itemView.findViewById(R.id.icon_text);
+            imgProfile = (ImageView) itemView.findViewById(R.id.icon_profile);
+            viewdetail = (Button) itemView.findViewById(R.id.viewdetails);
         }
 
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customertasks_row,parent,false);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customertasks_row, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -71,9 +68,8 @@ public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_A
 
         refh.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists()) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
                     Task task = dataSnapshot.getValue(Task.class);
                     holder.taskname.setText(task.getName());
                     String iconText = task.getName().toUpperCase();
@@ -81,7 +77,7 @@ public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_A
                     holder.imgProfile.setImageResource(R.drawable.bg_circle);
                     holder.imgProfile.setColorFilter(task.getColor());
                     holder.timestamp.setText(task.getStartDate());
-                    applyClickEvents(holder,position);
+                    applyClickEvents(holder, position);
                 }
             }
 
@@ -91,9 +87,7 @@ public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_A
             }
         });
 
-
-            }
-        holder.viewdetail.setVisibility(View.GONE);
+        //holder.viewdetail.setVisibility(View.GONE);
         /*setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,14 +108,12 @@ public class CustomerTasks_Adapter extends  RecyclerView.Adapter<CustomerTasks_A
     }
     private void applyClickEvents(CustomerTasks_Adapter.MyViewHolder holder, final int position) {
 
-        holder.viewdetail.setOnClickListener(new View.OnClickListener() {
+        holder.viewdetail.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 listener.onCustomerTaskRowClicked(position);
             }
         });
-
     }
-
-
 }

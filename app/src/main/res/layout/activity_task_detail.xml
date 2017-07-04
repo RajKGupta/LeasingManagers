@@ -106,7 +106,9 @@
                 android:text="Description: "
                 android:textColor="#000000"
                 android:textSize="20dp"
+                android:drawableEnd="@mipmap/ic_drop_down"
                 android:layout_marginTop="10dp"
+                android:drawableRight="@mipmap/ic_drop_down"
                 android:id="@+id/textView5" />
 
             <EditText
@@ -114,7 +116,16 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
                 android:id="@+id/description"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:visibility="gone"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/rec_DescImages"
+                android:visibility="gone"
+                android:nestedScrollingEnabled="true">
+            </android.support.v7.widget.RecyclerView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

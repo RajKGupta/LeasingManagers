@@ -191,6 +191,7 @@ public class TaskHome extends Fragment implements taskAdapter.TaskAdapterListene
     void showpd(String text)
     {
         progressDialog.setMessage(text);
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
     void hidepd()

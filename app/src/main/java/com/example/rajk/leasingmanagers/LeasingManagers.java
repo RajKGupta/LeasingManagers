@@ -2,6 +2,7 @@ package com.example.rajk.leasingmanagers;
 
 
 import com.example.rajk.leasingmanagers.CheckInternetConnectivity.NetWatcher;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +20,8 @@ public class LeasingManagers extends android.support.multidex.MultiDexApplicatio
         if(!FirebaseApp.getApps(this).isEmpty()){
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         }
+
+        Fresco.initialize(getApplicationContext());
 
     }
     public static synchronized LeasingManagers getInstance() {

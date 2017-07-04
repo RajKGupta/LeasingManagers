@@ -1,7 +1,11 @@
 package com.example.rajk.leasingmanagers.adapter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.rajk.leasingmanagers.MainViews.CreateTask;
 import com.example.rajk.leasingmanagers.R;
 import com.example.rajk.leasingmanagers.model.CompletedBy;
 import com.google.firebase.database.DataSnapshot;
@@ -31,13 +36,16 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
     private Context context;
     SharedPreferences sharedPreferences ;
     String type,taskId;
+    assignedto_adapterListener listener;
+    public CompletedBy emp = new CompletedBy();
 
-    public assignedto_adapter(List<CompletedBy> list, Context context, String type,String taskId) {
+    public assignedto_adapter(List<CompletedBy> list, Context context, String type,String taskId,assignedto_adapterListener listener) {
         this.list = list;
         this.context = context;
         sharedPreferences = context.getSharedPreferences("SESSION",Context.MODE_PRIVATE);
         this.type = type;
         this.taskId=taskId;
+        this.listener = listener;
 
     }
 
@@ -51,7 +59,7 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
     @Override
     public void onBindViewHolder(final assignedto_adapter.MyViewHolder holder, final int position)
     {
-        final CompletedBy emp = list.get(position);
+        emp = list.get(position);
         if (type.equals("CompletedBy")) {
             holder.button_rl.setVisibility(View.GONE);
             holder.noteAuthor.setText("Employee's Note:");
@@ -61,7 +69,6 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
             holder.noteAuthor.setText("Coordinator's Note:");
             holder.tv_dateCompleted.setText("Expected Deadline :");
         }
-
 
         DatabaseReference dbEmp = FirebaseDatabase.getInstance().getReference().child("MeChat").child("Employee").child(emp.getEmpId()).getRef();
         dbEmp.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -83,28 +90,7 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
             }
         });
 
-        holder.removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference dbCancelJob = FirebaseDatabase.getInstance().getReference().child("MeChat").child("Task").child(taskId).child("AssignedTo").child(emp.getEmpId()).getRef();
-                dbCancelJob.removeValue();
-                list.remove(position);
-
-
-                DatabaseReference dbEmployee = FirebaseDatabase.getInstance().getReference().child("MeChat").child("Employee").child(emp.getEmpId()).child("AssignedTask").child(taskId);
-                dbEmployee.removeValue(); //for employee
-
-                notifyDataSetChanged();
-            }
-        });
-
-        holder.remindButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+        applyClickEvents(holder,position);
     }
 
     @Override
@@ -146,5 +132,25 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
 
 
         }
+    }
+    public interface assignedto_adapterListener {
+        void onRemoveButtonClicked(int position);
+        void onRemindButtonClicked(int position);
+    }
+    private void applyClickEvents(MyViewHolder holder, final int position) {
+
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRemoveButtonClicked(position);
+            }
+        });
+
+        holder.remindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRemindButtonClicked(position);
+            }
+        });
     }
 }

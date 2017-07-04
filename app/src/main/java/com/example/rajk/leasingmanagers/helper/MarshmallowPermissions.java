@@ -7,6 +7,7 @@ package com.example.rajk.leasingmanagers.helper;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class MarshmallowPermissions {
 
     public boolean checkPermissionForCamera(){
         int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
-        if (result == PackageManager.PERMISSION_GRANTED){
+        if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
             return false;
@@ -101,11 +102,13 @@ public class MarshmallowPermissions {
         }
     }
 
-    public void requestPermissionForCamera(){
+    public void requestPermissionForCamera()
+    {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)){
             Toast.makeText(activity, "Please allow to be able to take camera images.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
+
 }

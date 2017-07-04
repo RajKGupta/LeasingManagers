@@ -74,9 +74,8 @@ public class Cust_details extends AppCompatActivity implements CustomerTasks_Ada
         db = FirebaseDatabase.getInstance().getReference().child("MeChat").child("Customer").child(id);
         dblistener =db.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
                 Map<String, String> map_new = (Map<String, String>) dataSnapshot.getValue();
 
                 name = (map_new.get("name"));

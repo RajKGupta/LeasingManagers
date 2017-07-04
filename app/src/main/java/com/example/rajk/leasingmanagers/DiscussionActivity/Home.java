@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements topicAdapter.TopicAdapter
 
         dbTopic = FirebaseDatabase.getInstance().getReference().child("MeChat").child("Topic").child(se.getPlace_id()).getRef();
         LoadData();
-        mAdapter = new topicAdapter(TopicList,this,this);
+        mAdapter = new topicAdapter(TopicList,getApplicationContext(),this);
         linearLayoutManager=new LinearLayoutManager(this);
         Topic_list.setLayoutManager(linearLayoutManager);
         Topic_list.setItemAnimator(new DefaultItemAnimator());
