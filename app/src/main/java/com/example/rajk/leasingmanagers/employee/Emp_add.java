@@ -57,7 +57,7 @@ public class Emp_add extends AppCompatActivity {
                 (this,android.R.layout.simple_dropdown_item_1line,designations);
         Desig.setAdapter(adapterstate);
         Desig.setThreshold(0);//will start working from first character
-        Desig.setTextColor(Color.BLACK);
+   //     Desig.setTextColor(Color.BLACK);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
