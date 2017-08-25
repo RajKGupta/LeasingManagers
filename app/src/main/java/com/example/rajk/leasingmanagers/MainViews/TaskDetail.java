@@ -894,6 +894,16 @@ public class TaskDetail extends AppCompatActivity implements taskdetailDescImage
         return true;
     }
 
+    //hi
+    //please
+    //merge this
+    //hehhe
+    //klhcl
+
+    void please()
+    {
+        //lalu ji
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
