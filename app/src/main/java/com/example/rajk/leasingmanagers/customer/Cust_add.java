@@ -88,8 +88,8 @@ public class Cust_add extends AppCompatActivity {
                 }
             }
         });
-
     }
+
     private int getRandomMaterialColor(String typeColor) {
         int returnColor = Color.GRAY;
         int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getPackageName());
@@ -116,8 +116,6 @@ public class Cust_add extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         }
-
-
                     })
 
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -127,7 +125,5 @@ public class Cust_add extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
-
-
     }
 }

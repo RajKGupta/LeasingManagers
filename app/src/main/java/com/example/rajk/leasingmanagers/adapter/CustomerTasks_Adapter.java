@@ -32,7 +32,7 @@ public class CustomerTasks_Adapter extends RecyclerView.Adapter<CustomerTasks_Ad
     private CustomerTaskAdapterListener listener;
     private String customerId;
 
-    public CustomerTasks_Adapter(List<String> list, Context c, CustomerTaskAdapterListener listener,String customerId) {
+    public CustomerTasks_Adapter(List<String> list, Context c, CustomerTaskAdapterListener listener, String customerId) {
         this.list = list;
         this.context = c;
         this.listener = listener;
@@ -40,14 +40,14 @@ public class CustomerTasks_Adapter extends RecyclerView.Adapter<CustomerTasks_Ad
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView taskname, timestamp, icon_text,tv_taskStatus;
+        TextView taskname, timestamp, icon_text, tv_taskStatus;
         ImageView imgProfile;
         RelativeLayout viewdetail;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             taskname = (TextView) itemView.findViewById(R.id.tv_taskname);
-            tv_taskStatus = (TextView)itemView.findViewById(R.id.tv_taskStatus);
+            tv_taskStatus = (TextView) itemView.findViewById(R.id.tv_taskStatus);
             timestamp = (TextView) itemView.findViewById(R.id.timestamp);
             icon_text = (TextView) itemView.findViewById(R.id.icon_text);
             imgProfile = (ImageView) itemView.findViewById(R.id.icon_profile);
@@ -63,20 +63,18 @@ public class CustomerTasks_Adapter extends RecyclerView.Adapter<CustomerTasks_Ad
     }
 
     @Override
-    public void onBindViewHolder(final CustomerTasks_Adapter.MyViewHolder holder, final int position)
-    {
+    public void onBindViewHolder(final CustomerTasks_Adapter.MyViewHolder holder, final int position) {
         final DatabaseReference taskStatus = DBREF.child("Customer").child(customerId).child("Task").child(list.get(position)).getRef();
         taskStatus.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String status = dataSnapshot.getValue(String.class);
-                if(status.equals("pending"))
-                {
-                    holder.tv_taskStatus.setText("(Pending)");
-                }
-                else
-                {
-                    holder.tv_taskStatus.setText("(Completed)");
+                if (dataSnapshot.exists()) {
+                    String status = dataSnapshot.getValue(String.class);
+                    if (status.equals("pending")) {
+                        holder.tv_taskStatus.setText("(Pending)");
+                    } else {
+                        holder.tv_taskStatus.setText("(Completed)");
+                    }
                 }
             }
 

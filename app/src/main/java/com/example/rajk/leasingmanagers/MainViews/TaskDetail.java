@@ -920,7 +920,7 @@ public class TaskDetail extends AppCompatActivity implements taskdetailDescImage
                                                             idLong = 9999999999999L - idLong;
                                                             sendNotifToAllCoordinators(mykey, "completeJob", "Task " + task.getName() + " has been successfully completed", task_id);
                                                             sendNotif(mykey, task.getCustomerId(), "completeJob", "Task " + task.getName() + " has been successfully completed", task_id);
-                                                            dbCompleted.child(mykey).setValue(new CompletedJob(coordinatorSession.getName(),"Coordinator",mykey,task.getStartDate(), new SimpleDateFormat("DD/MM/YYYY").format(Calendar.getInstance().getTime()), mykey, coordinatorSession.getName(), "Customer has been notified", "Task is successfully completed", idLong + ""));
+                                                            dbCompleted.child(mykey).setValue(new CompletedJob(coordinatorSession.getName(),"Coordinator",mykey,task.getStartDate(), new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()), mykey, coordinatorSession.getName(), "Customer has been notified", "Task is successfully completed", idLong + ""));
                                                             Toast.makeText(TaskDetail.this, "Job completed sucessfully", Toast.LENGTH_SHORT).show();
                                                             dbTaskCompleteStatus.setValue("complete");
                                                             dialog.dismiss();
