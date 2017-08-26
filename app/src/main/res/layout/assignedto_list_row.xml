@@ -3,8 +3,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/ll_overall"
     android:layout_margin="1dp"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:id="@+id/ll_overall">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

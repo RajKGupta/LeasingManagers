@@ -154,6 +154,5 @@ public class coordinatorLogin extends AppCompatActivity {
         Intent intent = new Intent(this, Tabs.class);
         startActivity(intent);
         finish();
-
     }
 }

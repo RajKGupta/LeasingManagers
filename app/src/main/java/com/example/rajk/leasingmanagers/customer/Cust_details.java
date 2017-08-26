@@ -215,7 +215,7 @@ public class Cust_details extends AppCompatActivity implements CustomerTasks_Ada
                             db.child("name").setValue(temp_name);
                             db.child("address").setValue(temp_add);
                             db.child("phone_num").setValue(temp_num);
-                            DBREF.child("Users").child("Usersessions").child(num).child("num").setValue(temp_num);
+                            DBREF.child("Users").child("Usersessions").child(id).child("num").setValue(temp_num);
 
                             customerEditDetails.dismiss();
                         }

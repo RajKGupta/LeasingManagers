@@ -17,30 +17,15 @@ import java.util.Calendar;
  * Created by RajK on 11-05-2017.
  */
 public class LeasingManagers extends android.support.multidex.MultiDexApplication {
-    private static LeasingManagers mInstance;
     public static DatabaseReference DBREF, notif;
     public static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa");
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-    String userkey;
+    public static SimpleDateFormat simpleDateFormatDDMMYYYY = new SimpleDateFormat("dd-MM-yyyy");
     public static String AppName = "demo";
+    private static LeasingManagers mInstance;
+    String userkey;
+
     private CoordinatorSession session;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mInstance = this;
-        Fresco.initialize(getApplicationContext());
-        if (!FirebaseApp.getApps(this).isEmpty()) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        }
-        DBREF = FirebaseDatabase.getInstance().getReference().child(AppName).getRef();
-        notif = DBREF.child("Notification");
-        session = new CoordinatorSession(this);
-        userkey = session.getUsername();
-        setOnlineStatus(userkey);
-        Fresco.initialize(getApplicationContext());
-
-    }
 
     public static synchronized LeasingManagers getInstance() {
         return mInstance;
@@ -134,6 +119,23 @@ public class LeasingManagers extends android.support.multidex.MultiDexApplicatio
 
             }
         });
+
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mInstance = this;
+        Fresco.initialize(getApplicationContext());
+        if (!FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
+        DBREF = FirebaseDatabase.getInstance().getReference().child(AppName).getRef();
+        notif = DBREF.child("Notification");
+        session = new CoordinatorSession(this);
+        userkey = session.getUsername();
+        setOnlineStatus(userkey);
+        Fresco.initialize(getApplicationContext());
 
     }
 

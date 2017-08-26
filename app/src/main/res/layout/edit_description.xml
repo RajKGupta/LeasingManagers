@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:background="@color/backgroundColorLight">
 
     <TextView
         android:layout_width="match_parent"
@@ -30,6 +31,7 @@
         android:textSize="17dp"
         android:hint="Your message here !"
         android:id="@+id/description"
+        android:inputType="textMultiLine"
         android:textColorHint="@color/grey_500"/>
 
     <RelativeLayout
@@ -49,9 +51,9 @@
                 android:text="Save"
                 android:id="@+id/oksave"
                 android:layout_margin="7dp"
-
                 android:textSize="15dp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorPrimary"
+                android:background="@color/colorAccent"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -60,7 +62,8 @@
                 android:id="@+id/okcancel"
                 android:layout_margin="7dp"
                 android:textSize="15dp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorPrimary"
+                android:background="@color/colorAccent"/>
 
         </LinearLayout>
 

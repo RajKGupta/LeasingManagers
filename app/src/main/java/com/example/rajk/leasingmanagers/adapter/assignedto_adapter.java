@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rajk.leasingmanagers.R;
@@ -16,10 +17,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.rajk.leasingmanagers.LeasingManagers.DBREF;
+import static com.example.rajk.leasingmanagers.LeasingManagers.simpleDateFormatDDMMYYYY;
 
 public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter.MyViewHolder>
 {
@@ -75,8 +81,32 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
 
             }
         });
-
+        applyBackgroundColor(holder,emp);
         applyClickEvents(holder,position);
+    }
+
+    private void applyBackgroundColor(MyViewHolder holder,CompletedBy emp) {
+
+        try {
+            Date curDate = new Date();
+
+            curDate.setTime(Calendar.MONTH);
+            curDate.setTime(Calendar.YEAR);
+            curDate.setTime(Calendar.DATE);
+
+            Date aDate = simpleDateFormatDDMMYYYY.parse(emp.getDateassigned());
+
+            if(curDate.compareTo(aDate)>-1)
+            {
+                holder.ll_overall.setBackgroundColor(R.color.colorAccent);
+            }
+            else
+            {
+                holder.ll_overall.setBackgroundColor(R.color.white);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -87,12 +117,13 @@ public class assignedto_adapter extends  RecyclerView.Adapter<assignedto_adapter
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView dateCompleted,employeename,employeeDesig,dateassigned,tv_dateCompleted,noteAuthor,noteString,assignedby;
         ImageButton open_options;
+        LinearLayout ll_overall;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             dateCompleted = (TextView) itemView.findViewById(R.id.dateCompleted);
-
+            ll_overall = (LinearLayout)itemView.findViewById(R.id.ll_overall);
             employeename = (TextView)
                     itemView.findViewById(R.id.employeeName);
 

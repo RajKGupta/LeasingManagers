@@ -69,16 +69,14 @@ public class CustomerTasks_Adapter extends RecyclerView.Adapter<CustomerTasks_Ad
         taskStatus.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String status = dataSnapshot.getValue(String.class);
-                if(status.equals("pending"))
-                {
-                    holder.tv_taskStatus.setText("(Pending)");
-                }
-                else
-                {
-                    holder.tv_taskStatus.setText("(Completed)");
-                }
-            }
+                if(dataSnapshot.exists()) {
+                    String status = dataSnapshot.getValue(String.class);
+                    if (status.equals("pending")) {
+                        holder.tv_taskStatus.setText("(Pending)");
+                    } else {
+                        holder.tv_taskStatus.setText("(Completed)");
+                    }
+            }}
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

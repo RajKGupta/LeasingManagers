@@ -6,15 +6,24 @@ package com.example.rajk.leasingmanagers.model;
 
 public class Phonebook {
 
-    private String contact, name, designation;
+    private String contact, name, designation, email;
 
-    public Phonebook(String contact, String name, String designation) {
+    public Phonebook(String contact, String name, String designation, String email) {
         this.contact = contact;
         this.name = name;
         this.designation = designation;
+        this.email = email;
     }
 
     public Phonebook() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDesignation() {

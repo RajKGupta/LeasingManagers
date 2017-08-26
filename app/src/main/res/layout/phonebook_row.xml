@@ -1,85 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/employee_row"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:padding="5dp"
-    android:id="@+id/employee_row">
+    android:orientation="vertical"
+    android:padding="5dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
         <RelativeLayout
             android:id="@+id/icon_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/icon_front"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center">
+
                 <ImageView
                     android:id="@+id/icon_profile"
                     android:layout_width="@dimen/icon_width_height"
                     android:layout_height="@dimen/icon_width_height"
-                    android:src="@drawable/bg_circle"/>
+                    android:src="@drawable/bg_circle" />
+
                 <TextView
                     android:id="@+id/icon_text"
-                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/icon_text" />
             </RelativeLayout>
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:layout_gravity="center"
-            android:layout_toRightOf="@+id/icon_container">
+            android:layout_toRightOf="@+id/icon_container"
+            android:orientation="vertical">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/Name"
-                android:text="Name"
-                android:textStyle="bold"
-                android:textAllCaps="true"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/Desig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Desig"
-                android:textStyle="italic|bold"
-                />
+                android:textStyle="italic|bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/callme"
-                android:background="@drawable/ic_call_me"
-                android:layout_margin="6dp"/>
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/callme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/ic_call_me" />
+
+            <ImageButton
                 android:id="@+id/deleteme"
-                android:background="@drawable/ic_delete_black_24dp"
-                android:layout_margin="6dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/ic_delete_black_24dp" />
 
         </LinearLayout>
     </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:background="@color/white"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Contact Details : "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

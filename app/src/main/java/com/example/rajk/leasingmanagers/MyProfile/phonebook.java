@@ -39,7 +39,7 @@ public class phonebook extends AppCompatActivity implements phonebook_adapter.ph
     LinearLayoutManager linearLayoutManager;
     DatabaseReference dbCoordinator;
     private AlertDialog add_contacts;
-    String Name, Desig, Contact;
+    String Name, Desig, Contact, Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,7 @@ public class phonebook extends AppCompatActivity implements phonebook_adapter.ph
                 final EditText name = (EditText) add_contacts.findViewById(R.id.name);
                 final EditText designation = (EditText) add_contacts.findViewById(R.id.designation);
                 final EditText contact = (EditText) add_contacts.findViewById(R.id.contact);
+                final EditText email = (EditText) add_contacts.findViewById(R.id.email);
                 Button save = (Button) add_contacts.findViewById(R.id.oksave);
                 Button cancel = (Button) add_contacts.findViewById(R.id.okcancel);
 
@@ -119,11 +120,12 @@ public class phonebook extends AppCompatActivity implements phonebook_adapter.ph
                         Name = name.getText().toString().trim();
                         Desig = designation.getText().toString().trim();
                         Contact = contact.getText().toString().trim();
+                        Email = email.getText().toString().trim();
 
                         if (TextUtils.isEmpty(Name) || TextUtils.isEmpty(Desig) || (TextUtils.isEmpty(Contact))) {
                             Toast.makeText(phonebook.this, "Fill all the details", Toast.LENGTH_SHORT).show();
                         } else {
-                            Phonebook phonebook = new Phonebook(Contact, Name, Desig);
+                            Phonebook phonebook = new Phonebook(Contact, Name, Desig, Email);
                             DBREF.child("Contacts").child(Contact).setValue(phonebook);
 
                             Toast.makeText(phonebook.this, "Contact Added", Toast.LENGTH_SHORT).show();
