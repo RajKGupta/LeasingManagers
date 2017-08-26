@@ -1,5 +1,6 @@
 package com.example.rajk.leasingmanagers.CoordinatorLogin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class coordinatorLogin extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     TextInputLayout input_email, input_password;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,19 +102,29 @@ public class coordinatorLogin extends AppCompatActivity {
     private void login() {
 
         database = DBREF.child("Coordinator").child(Username).getRef();
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
 
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Logging in...");
+        pDialog.setCancelable(true);
+        pDialog.show();
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Coordinator coordinator = dataSnapshot.getValue(Coordinator.class);
                     String p = coordinator.getPassword();
                     if (!Password.equals(coordinator.getPassword())) {
+                        pDialog.dismiss();
                         Toast.makeText(getBaseContext(), "Wrong Password", Toast.LENGTH_SHORT).show();
                     } else {
                         session.create_oldusersession(Username, coordinator.getName(), coordinator.getContact(), coordinator.getAddress());
                         LeasingManagers.setOnlineStatus(Username);
                         String myFCMToken;
+
+                        pDialog.dismiss();
+
                         if (FirebaseInstanceId.getInstance().getToken() == null)
                             myFCMToken = sharedPreferences.getString("myFCMToken", "");
 
@@ -126,6 +138,7 @@ public class coordinatorLogin extends AppCompatActivity {
                             Toast.makeText(coordinatorLogin.this, "You will need to clear the app data or reinstall the app to make it work properly", Toast.LENGTH_LONG).show();
                     }
                 } else {
+                    pDialog.dismiss();
                     Toast.makeText(getBaseContext(), "Coordinator Not Registered", Toast.LENGTH_SHORT).show();
                 }
             }

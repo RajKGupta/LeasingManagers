@@ -24,6 +24,7 @@ public class LeasingManagers extends android.support.multidex.MultiDexApplicatio
     public static String AppName = "demo";
     private static LeasingManagers mInstance;
     String userkey;
+
     private CoordinatorSession session;
 
     public static synchronized LeasingManagers getInstance() {
